@@ -35,6 +35,7 @@ def millipede(size, comment=None, reverse=False):
 
     return output
 
+
 def main():
     """
     Entry point
