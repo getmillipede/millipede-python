@@ -5,17 +5,36 @@ https://github.com/evadot/millipede
 
 from setuptools import setup, find_packages
 from codecs import open
-from os import path
+import os
+import re
 
-here = path.abspath(path.dirname(__file__))
 
-with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
+MODULE_NAME = 'millipede'
+
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+
+with open(os.path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+
+def get_version():
+    """ Reads package version number from package's __init__.py. """
+    with open(os.path.join(
+        os.path.dirname(__file__), MODULE_NAME, '__init__.py'
+    )) as init:
+        for line in init.readlines():
+            res = re.match(r'^__version__ = [\'"](.*)[\'"]$', line)
+            if res:
+                return res.group(1)
+    raise ValueError('No __version__ found in __init__.py')
+
+
 setup(
-    name="millipede",
-    version="0.1",
-    description="A millipede generator",
+    name=MODULE_NAME,
+    version=get_version(),
+    description="THE millipede generator",
     long_description=long_description,
 
     url="https://github.com/evadot/millipede",
@@ -24,6 +43,10 @@ setup(
     author_email="millipede@bidouilliste.com",
 
     license="MIT",
+
+    extras_require={
+        'sms': ['requests']
+    },
 
     classifiers=[
         'Development Status :: 4 - Beta',
