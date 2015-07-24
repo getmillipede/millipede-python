@@ -1,5 +1,16 @@
 language: python
-install: "pip install pylint"
+
+python:
+  - 2.7
+  - 3.3
+  - 3.4
+
+before_install:
+  - pip install pylint
+
+install:
+  - python setup.py install
+
 script:
-  - "pylint millipede"
-  - "python setup.py test"
+  - pylint millipede
+  - python setup.py test
