@@ -15,7 +15,7 @@ with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
 setup(
     name="millipede",
     version="0.1",
-    description="A millipede generator",
+    description="THE millipede generator",
     long_description=long_description,
 
     url="https://github.com/evadot/millipede",
