@@ -54,9 +54,8 @@ def millipede(size, comment=None, reverse=False, template='default'):
 
 
 def api_post(message, url, name, http_data=None, auth=None):
-    """ Send `message` to `phone_number` using the Rentabiliweb SMS API.
-    It requires to have a contract with Rentabiliweb, valid credentials and to
-    send the message from a whitelisted IP address.
+    """ Send `message` as `name` to `url`.
+    You can specify extra variables in `http_data`
     """
     try:
         import requests
