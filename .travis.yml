@@ -1,5 +1,19 @@
+sudo: false
+
 language: python
-install: "pip install pylint"
+
+python:
+  - 2.7
+  - 3.3
+  - 3.4
+
+before_install:
+  - pip install pylint
+
+install:
+  - python setup.py install
+
 script:
-  - "pylint millipede"
-  - "python setup.py test"
+  - pylint setup.py millipede
+  - python setup.py test
+  - millipede -r 42 'I successfully passed the tests!'
