@@ -51,6 +51,3 @@ def main():
     args = parser.parse_args()
 
     print(millipede(args.size, comment=args.comment, reverse=args.reverse))
-
-if __name__ == "__main__":
-    main()
