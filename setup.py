@@ -25,6 +25,10 @@ setup(
 
     license="MIT",
 
+    extras_require={
+        'sms': ['requests']
+    },
+
     classifiers=[
         'Development Status :: 4 - Beta',
 

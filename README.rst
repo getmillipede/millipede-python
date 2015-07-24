@@ -70,6 +70,8 @@ There's also a very convenient `-r` option to reverse the millipede::
  
  # install (for developement)
  $> pip install -e .
+ # Or, to install dependencies to send SMS
+ $> pip install -e .[sms]
  
  # install (for production)
  $> pip install .
