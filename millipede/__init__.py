@@ -14,17 +14,28 @@ import sys
 __version__ = '0.1'
 
 
-def millipede(size, comment=None, reverse=False):
+def millipede(size, comment=None, reverse=False, template='default'):
     """
     Output the millipede
     """
     padding_offsets = [2, 1, 0, 1, 2, 3, 4, 4, 3]
 
+    templates = {
+        'frozen': {'body': '╔═(❄❄❄)═╗', 'bodyr': '╚═(❄❄❄)═╝'},
+        'love': {'body': '╔═(♥♥♥)═╗', 'bodyr': '╚═(♥♥♥)═╝'},
+        'corporate': {'body': '╔═(©©©)═╗', 'bodyr': '╚═(©©©)═╝'},
+        'musician': {'body': '╔═(♫♩♬)═╗', 'bodyr': '╚═(♫♩♬)═╝'},
+        'bocal': {'body': '╔═(🐟🐟🐟)═╗', 'bodyr': '╚═(🐟🐟🐟)═╝'},
+        'default': {'body': '╔═(███)═╗', 'bodyr': '╚═(███)═╝'},
+    }
+
+    template = templates.get(template, templates['default'])
+
     head = "    ╔⊙ ⊙╗\n" if reverse else "    ╚⊙ ⊙╝\n"
     body = "".join([
         "{}{}\n".format(
             " " * padding_offsets[(x + 3 * int(reverse)) % 9],
-            "╔═(███)═╗" if reverse else "╚═(███)═╝"
+            template['body'] if reverse else template['bodyr']
         )
         for x in range(size)
     ])
@@ -82,6 +93,8 @@ def main():
     parser.add_argument('-r', '--reverse',
                         action='store_true',
                         help='reverse the millipede')
+    parser.add_argument('-t', '--template',
+                        help='customize your millipede')
     parser.add_argument(
         '--to',
         metavar="International phone number, starting with a `+'",
@@ -97,7 +110,7 @@ def main():
     )
     args = parser.parse_args()
 
-    out = millipede(args.size, comment=args.comment, reverse=args.reverse)
+    out = millipede(args.size, comment=args.comment, reverse=args.reverse, template=args.template)
 
     if args.to:
         if not args.rentabiliweb_creds:
