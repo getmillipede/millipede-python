@@ -35,7 +35,7 @@ def millipede(size, comment=None, reverse=False, template='default'):
     body = "".join([
         "{}{}\n".format(
             " " * padding_offsets[(x + 3 * int(reverse)) % 9],
-            template['body'] if reverse else template['bodyr']
+            template['bodyr'] if reverse else template['body']
         )
         for x in range(size)
     ])
