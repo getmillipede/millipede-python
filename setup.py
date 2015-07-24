@@ -21,14 +21,7 @@ with open(os.path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
 
 def get_version():
     """ Reads package version number from package's __init__.py. """
-    with open(os.path.join(
-        os.path.dirname(__file__), MODULE_NAME, '__init__.py'
-    )) as init:
-        for line in init.readlines():
-            res = re.match(r'^__version__ = [\'"](.*)[\'"]$', line)
-            if res:
-                return res.group(1)
-    raise ValueError('No __version__ found in __init__.py')
+    return __import__('millipede').__version__
 
 
 setup(
