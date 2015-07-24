@@ -26,10 +26,10 @@ setup(
     license="MIT",
 
     classifiers=[
-        'Development Status :: 4 - Alpha',
+        'Development Status :: 4 - Beta',
 
         'Intended Audience :: Religion',
-        'Topic :: Religion'
+        'Topic :: Religion',
 
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
