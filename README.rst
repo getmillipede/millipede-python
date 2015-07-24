@@ -75,3 +75,11 @@ Installation from sources
  
  # install (for production)
  $> pip install .
+
+Test in a confined environment
+==============================
+
+::
+
+ $ docker build -t millipede .
+ $ docker run millipede
