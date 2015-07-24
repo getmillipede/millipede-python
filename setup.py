@@ -18,18 +18,19 @@ setup(
     description="A millipede generator",
     long_description=long_description,
 
-    url="https://github.com/evadot/millipede"
+    url="https://github.com/evadot/millipede",
 
-    author="The millipede fan club"
+    author="The millipede fan club",
+    author_email="millipede@bidouilliste.com",
 
-    license="MIT"
+    license="MIT",
 
     classifiers=[
         'Development Status :: 4 - Alpha',
 
         'Intended Audience :: Religion',
         'Topic :: Religion'
-        
+
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
@@ -37,6 +38,8 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
     ],
+
+    packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
 
     keywords="millipede",
 
