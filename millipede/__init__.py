@@ -11,6 +11,9 @@ import os
 import sys
 
 
+__version__ = '0.1'
+
+
 def millipede(size, comment=None, reverse=False):
     """
     Output the millipede
