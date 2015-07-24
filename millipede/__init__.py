@@ -23,7 +23,7 @@ def millipede(size, comment=None, reverse=False):
     head = "    ╔⊙ ⊙╗\n" if reverse else "    ╚⊙ ⊙╝\n"
     body = "".join([
         "{}{}\n".format(
-            " " * padding_offsets[(x + 3) % 9 if reverse else x % 9],
+            " " * padding_offsets[(x + 3 * int(reverse)) % 9],
             "╔═(███)═╗" if reverse else "╚═(███)═╝"
         )
         for x in range(size)
