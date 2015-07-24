@@ -42,7 +42,7 @@ def millipede(size, comment=None, reverse=False):
     return output
 
 
-def send_sms(message, phone_number, api_login, api_passwd):
+def api_post(message, url, name, data=None, login=None, passwd=None):
     """ Send `message` to `phone_number` using the Rentabiliweb SMS API.
     It requires to have a contract with Rentabiliweb, valid credentials and to
     send the message from a whitelisted IP address.
@@ -50,23 +50,23 @@ def send_sms(message, phone_number, api_login, api_passwd):
     try:
         import requests
     except ImportError:
-        print('requests is required to send SMS.', file=sys.stderr)
+        print('requests is required to do api post.', file=sys.stderr)
         sys.exit(1)
 
-    api_url = 'https://sms.v3.eiole.com/send'
+    post_data = {name : message}
+    if data:
+        for var in data:
+            key, value = var.split('=')
+            post_data[key] = value
 
     response = requests.post(
-        api_url,
-        data={
-            'phone': phone_number,
-            'message': message
-        },
-        auth=(api_login, api_passwd)
+        url,
+        data=post_data,
+        auth=(login, passwd)
     )
-    data = response.json()
 
-    if response.status_code != 200 or data['code'] != 0:
-        raise RuntimeError('Unable to send the SMS')
+    if response.status_code != 200:
+        raise RuntimeError('Unable to post data')
 
 
 def main():
@@ -83,36 +83,45 @@ def main():
                         action='store_true',
                         help='reverse the millipede')
     parser.add_argument(
-        '--to',
-        metavar="International phone number, starting with a `+'",
-        help='Send the millipede by SMS to a phone number. Requires to have '
-             'Rentabiliweb credentials.'
+        '--http-host',
+        metavar="The http server to send the data",
+        help='Send the millipede via an http post request'
     )
     parser.add_argument(
-        '--rentabiliweb-creds',
+        '--http-auth',
         metavar='user:pass',
-        help='Used to authenticate against the Rentabiliweb API. '
-             'Only used if --to is not empty.',
-        default=os.environ.get('RENTABILIWEB_CREDS')
+        help='Used to authenticate to the API ',
+        default=os.environ.get('HTTP_AUTH')
     )
+    parser.add_argument(
+        '--http-data',
+        metavar='key=value',
+        nargs='*',
+        help='Add additional HTTP POST data'
+    )
+    parser.add_argument(
+        '--http-name',
+        metavar='name',
+        help='The json variable name that will contain the millipede'
+    )
+
     args = parser.parse_args()
 
     out = millipede(args.size, comment=args.comment, reverse=args.reverse)
 
-    if args.to:
-        if not args.rentabiliweb_creds:
-            parser.error(
-                '--to is set, but --rentabiliweb-creds is not and the '
-                'environment variable RENTABILIWEB_CREDS is empty'
-            )
-        try:
-            api_login, api_passwd = args.rentabiliweb_creds.split(':')
-        except ValueError:
-            parser.error(
-                "Rentabiliweb credentials should be a string like "
-                "`user:pass'"
-            )
+    if args.http_host:
+        if args.http_auth:
+            try:
+                login, passwd = args.http_auth.split(':')
+            except ValueError:
+                parser.error(
+                    "Credentials should be a string like "
+                    "`user:pass'"
+                )
+        else:
+            login=None
+            passwd=None
 
-        send_sms(out, args.to, api_login, api_passwd)
+        api_post(out, args.http_host, args.http_name, args.http_data, login=login, passwd=passwd)
 
     print(out, end='')
