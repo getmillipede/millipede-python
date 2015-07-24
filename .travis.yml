@@ -1,3 +1,5 @@
 language: python
 install: "pip install pylint"
-script: "pylint millipede"
+script:
+  - "pylint millipede"
+  - "python setup.py test"

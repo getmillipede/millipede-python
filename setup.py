@@ -64,6 +64,8 @@ setup(
 
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
 
+    test_suite="tests",
+
     keywords="millipede",
 
     entry_points={
