@@ -85,5 +85,5 @@ class TestMillipedeReverse(unittest.TestCase):
             millipede.millipede(1, comment="coucou", reverse=True),
             """ ╔═(███)═╗\n"""
             """    ╔⊙ ⊙╗\n\n"""
-            """coucou"""
+            """coucou\n"""
         )
