@@ -53,7 +53,7 @@ def millipede(size, comment=None, reverse=False, template='default'):
     return output
 
 
-def api_post(message, url, name, http_data=None, login=None, passwd=None):
+def api_post(message, url, name, http_data=None, auth=None):
     """ Send `message` to `phone_number` using the Rentabiliweb SMS API.
     It requires to have a contract with Rentabiliweb, valid credentials and to
     send the message from a whitelisted IP address.
@@ -73,7 +73,7 @@ def api_post(message, url, name, http_data=None, login=None, passwd=None):
     response = requests.post(
         url,
         data=data,
-        auth=(login, passwd)
+        auth=auth
     )
 
     if response.status_code != 200:
@@ -135,6 +135,12 @@ def main():
             login = None
             passwd = None
 
-        api_post(out, args.http_host, args.http_name, http_data=args.http_data, login=login, passwd=passwd)
+        api_post(
+            out,
+            args.http_host,
+            args.http_name,
+            http_data=args.http_data,
+            auth=(login, passwd)
+        )
 
     print(out, end='')
