@@ -41,7 +41,7 @@ setup(
     },
 
     classifiers=[
-        'Development Status :: 5 - Stable',
+        'Development Status :: 5 - Production/Stable',
 
         'Intended Audience :: Religion',
         'Topic :: Religion',
