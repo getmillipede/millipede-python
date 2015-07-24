@@ -5,7 +5,7 @@ Print a beautifull millipede to send to your friends !!!
 
 Basic usage::
 
- $ ./millipede.py 20 "Chaud devant! Mon millepatte doit passer!"
+ $ millipede 20 "Chaud devant! Mon millepatte doit passer!"
  
  Chaud devant! Mon millepatte doit passer!
  
@@ -33,7 +33,7 @@ Basic usage::
 
 There's also a very convenient `-r` option to reverse the millipede::
  
- $ ./millipede.py -r 20 'Aaah, il est passé !'
+ $ millipede -r 20 'Aaah, il est passé !'
  
   ╔═(███)═╗
    ╔═(███)═╗
@@ -58,3 +58,18 @@ There's also a very convenient `-r` option to reverse the millipede::
      ╔⊙ ⊙╗
  
  Aaah, il est passé !
+
+ Installation from sources
+==========================
+
+::
+
+ # create a virtualenv
+ $> virtualenv myenv
+ $> source myenv/bin/activate
+ 
+ # install (for developement)
+ $> pip install -e .
+ 
+ # install (for production)
+ $> pip install .
