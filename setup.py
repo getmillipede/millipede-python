@@ -4,23 +4,22 @@ https://github.com/evadot/millipede
 """
 
 from setuptools import setup, find_packages
-from codecs import open
+from codecs import open as copen
 import os
-import re
 
 
 MODULE_NAME = 'millipede'
 
 
-here = os.path.abspath(os.path.dirname(__file__))
+def get_long_description():
+    """ Retrieve the long description from DESCRIPTION.rst """
+    here = os.path.abspath(os.path.dirname(__file__))
 
-
-with open(os.path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
-    long_description = f.read()
-
+    with copen(os.path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as description:
+        return description.read()
 
 def get_version():
-    """ Reads package version number from package's __init__.py. """
+    """ Retrieve version information from the package """
     return __import__('millipede').__version__
 
 
@@ -28,7 +27,7 @@ setup(
     name=MODULE_NAME,
     version=get_version(),
     description="THE millipede generator",
-    long_description=long_description,
+    long_description=get_long_description(),
 
     url="https://github.com/evadot/millipede",
 
