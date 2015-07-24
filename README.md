@@ -1,2 +1,2 @@
 # milipede
-Print a beautifull milipede
+Print a beautifull millipede to send to your friends !!!
