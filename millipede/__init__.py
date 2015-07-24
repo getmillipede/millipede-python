@@ -5,7 +5,9 @@ Print a gorgeous millipede
 """
 
 from __future__ import print_function
+
 from argparse import ArgumentParser
+import sys
 
 
 def millipede(size, comment=None, reverse=False):
@@ -27,7 +29,7 @@ def millipede(size, comment=None, reverse=False):
     if reverse:
         output += body + head
         if comment:
-            output += "\n" + comment
+            output += "\n" + comment + "\n"
     else:
         if comment:
             output += comment + "\n\n"
@@ -51,4 +53,6 @@ def main():
                         help='reverse the millipede')
     args = parser.parse_args()
 
-    print(millipede(args.size, comment=args.comment, reverse=args.reverse))
+    sys.stdout.write(
+        millipede(args.size, comment=args.comment, reverse=args.reverse)
+    )
