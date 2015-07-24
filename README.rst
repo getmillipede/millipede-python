@@ -1,6 +1,9 @@
 millipede
 =========
 
+.. image:: https://travis-ci.org/evadot/millipede.svg
+           :target: https://travis-ci.org/evadot/millipede
+
 Print a beautifull millipede to send to your friends !!!
 
 Basic usage::
