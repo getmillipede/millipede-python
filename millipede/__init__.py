@@ -112,4 +112,4 @@ def main():
 
         send_sms(out, args.to, api_login, api_passwd)
 
-    sys.stdout.write(out)
+    print(out, end='')
