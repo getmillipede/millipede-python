@@ -16,3 +16,4 @@ install:
 script:
   - pylint millipede
   - python setup.py test
+  - millipede -r 42 'I successfully passed the tests!'
