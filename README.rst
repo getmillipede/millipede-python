@@ -59,7 +59,7 @@ There's also a very convenient `-r` option to reverse the millipede::
  
  Aaah, il est passé !
 
- Installation from sources
+Installation from sources
 ==========================
 
 ::
