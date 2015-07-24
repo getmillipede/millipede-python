@@ -1,8 +1,5 @@
-millipede
-=========
-
-.. image:: https://travis-ci.org/evadot/millipede.svg
-           :target: https://travis-ci.org/evadot/millipede
+millipede |build-status|
+========================
 
 Print a beautifull millipede to send to your friends !!!
 
@@ -114,3 +111,7 @@ Test in a confined environment
 
  $ docker build -t millipede .
  $ docker run millipede
+
+
+.. |build-status| image:: https://travis-ci.org/evadot/millipede.svg
+   :target: https://travis-ci.org/evadot/millipede
