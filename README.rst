@@ -90,12 +90,15 @@ HTTP Post
 =========
 
 You can send the millipede as POST data to a HTTP server::
- millipede 10 --http-host=http://localhost:5000/ --http-name message
+
+  millipede 10 --http-host=http://localhost:5000/ --http-name message
 
 Using --http-auth you can specify a username/password for authentication::
+
  millipede 10 --http-host=http://localhost:5000/ --http-name message --http_auth=user:pass
 
 And using --http-data key=value to can add more variables::
+
  millipede 10 --http-host=http://localhost:5000/ --http-name message --http-auth=user:pass --http-data myvar=mydata
 
 Installation from sources
