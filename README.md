@@ -28,3 +28,33 @@ Chaud devant! Mon millepatte doit passer!
   ╚═(███)═╝
    ╚═(███)═╝
 ```
+
+There's also a very convenient `-r` option to reverse the millipede :
+
+$ ./millipede.py -r 20 'Aaah, il est passé !'
+
+```text
+ ╔═(███)═╗
+  ╔═(███)═╗
+   ╔═(███)═╗
+    ╔═(███)═╗
+    ╔═(███)═╗
+   ╔═(███)═╗
+  ╔═(███)═╗
+ ╔═(███)═╗
+╔═(███)═╗
+ ╔═(███)═╗
+  ╔═(███)═╗
+   ╔═(███)═╗
+    ╔═(███)═╗
+    ╔═(███)═╗
+   ╔═(███)═╗
+  ╔═(███)═╗
+ ╔═(███)═╗
+╔═(███)═╗
+ ╔═(███)═╗
+  ╔═(███)═╗
+    ╔⊙ ⊙╗
+
+Aaah, il est passé !
+```
