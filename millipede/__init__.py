@@ -109,11 +109,13 @@ def main():
     Entry point
     """
     parser = ArgumentParser(description='Millipede generator')
-    parser.add_argument('size', metavar='s',
+    parser.add_argument('-s', '--size',
                         type=int,
+                        nargs="?",
                         help='the size of the millipede')
-    parser.add_argument('comment', metavar='c',
-                        help='the comment', nargs="?")
+    parser.add_argument('-c', '--comment',
+                        type=str,
+                        help='the comment')
     parser.add_argument('-v', '--version',
                         action='version',
                         version=__version__)
@@ -152,6 +154,9 @@ def main():
     )
 
     args = parser.parse_args()
+
+    if not args.size:
+        args.size=20
 
     out = millipede(
         args.size,
