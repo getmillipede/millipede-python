@@ -11,7 +11,7 @@ import os
 import sys
 
 
-__version__ = '1.0'
+__version__ = '1.1'
 
 
 #pylint: disable=too-many-arguments
@@ -114,6 +114,9 @@ def main():
                         help='the size of the millipede')
     parser.add_argument('comment', metavar='c',
                         help='the comment', nargs="?")
+    parser.add_argument('-v', '--version',
+                        action='version',
+                        version=__version__)
     parser.add_argument('-r', '--reverse',
                         action='store_true',
                         help='reverse the millipede')
