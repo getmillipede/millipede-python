@@ -156,7 +156,7 @@ def main():
     args = parser.parse_args()
 
     if not args.size:
-        args.size=20
+        args.size = 20
 
     out = millipede(
         args.size,
