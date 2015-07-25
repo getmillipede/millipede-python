@@ -14,13 +14,17 @@ import sys
 __version__ = '1.0'
 
 
-def millipede(size, comment=None, reverse=False, template='default', position=0):
+#pylint: disable=too-many-arguments
+def millipede(size, comment=None, reverse=False, template='default', position=0, opposite=False):
     """
     Output the millipede
     """
     padding_offsets = [2, 1, 0, 1, 2, 3, 4, 4, 3]
     padding_suite_length = len(padding_offsets)
     head_padding_extra_offset = 2
+
+    if opposite:
+        padding_offsets.reverse()
 
     position = position or 0
 
@@ -118,6 +122,9 @@ def main():
     parser.add_argument('-p', '--position',
                         type=int,
                         help='move your millipede')
+    parser.add_argument('-o', '--opposite',
+                        action='store_true',
+                        help='go the opposite direction')
     parser.add_argument(
         '--http-host',
         metavar="The http server to send the data",
@@ -148,7 +155,8 @@ def main():
         comment=args.comment,
         reverse=args.reverse,
         template=args.template,
-        position=args.position
+        position=args.position,
+        opposite=args.opposite
     )
 
     if args.http_host:
