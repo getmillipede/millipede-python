@@ -32,13 +32,18 @@ def millipede(size, comment=None, reverse=False, template='default'):
     template = templates.get(template, templates['default'])
 
     head = "    ╔⊙ ⊙╗\n" if reverse else "    ╚⊙ ⊙╝\n"
-    body = "".join([
+    body_lines = [
         "{}{}\n".format(
-            " " * padding_offsets[(x + 3 * int(reverse)) % 9],
+            " " * padding_offsets[x % 9],
             template['bodyr'] if reverse else template['body']
         )
         for x in range(size)
-    ])
+    ]
+
+    if reverse:
+        body_lines.reverse()
+
+    body = "".join(body_lines)
 
     output = ""
     if reverse:

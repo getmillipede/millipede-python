@@ -75,7 +75,7 @@ class TestMillipedeReverse(unittest.TestCase):
         "Test with reverse enabled"
         self.assertEqual(
             millipede.millipede(1, reverse=True),
-            """ ╔═(███)═╗\n"""
+            """  ╔═(███)═╗\n"""
             """    ╔⊙ ⊙╗\n"""
         )
 
@@ -83,7 +83,7 @@ class TestMillipedeReverse(unittest.TestCase):
         "Test a comment with reverse enabled"
         self.assertEqual(
             millipede.millipede(1, comment="coucou", reverse=True),
-            """ ╔═(███)═╗\n"""
+            """  ╔═(███)═╗\n"""
             """    ╔⊙ ⊙╗\n\n"""
             """coucou\n"""
         )
