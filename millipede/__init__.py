@@ -14,13 +14,15 @@ import sys
 __version__ = '1.0'
 
 
-def millipede(size, comment=None, reverse=False, template='default'):
+def millipede(size, comment=None, reverse=False, template='default', position=0):
     """
     Output the millipede
     """
     padding_offsets = [2, 1, 0, 1, 2, 3, 4, 4, 3]
     padding_suite_length = len(padding_offsets)
     head_padding_extra_offset = 2
+
+    position = position or 0
 
     templates = {
         'frozen': {'bodyr': '╔═(❄❄❄)═╗', 'body': '╚═(❄❄❄)═╝',
@@ -42,13 +44,13 @@ def millipede(size, comment=None, reverse=False, template='default'):
     template = templates.get(template, templates['default'])
 
     head = "{}{}\n".format(
-        " " * (padding_offsets[0] + head_padding_extra_offset),
+        " " * (padding_offsets[position % padding_suite_length] + head_padding_extra_offset),
         template['headr'] if reverse else template['head']
     )
 
     body_lines = [
         "{}{}\n".format(
-            " " * padding_offsets[x % padding_suite_length],
+            " " * padding_offsets[(x + position) % padding_suite_length],
             template['bodyr'] if reverse else template['body']
         )
         for x in range(size)
@@ -113,6 +115,9 @@ def main():
                         help='reverse the millipede')
     parser.add_argument('-t', '--template',
                         help='customize your millipede')
+    parser.add_argument('-p', '--position',
+                        type=int,
+                        help='move your millipede')
     parser.add_argument(
         '--http-host',
         metavar="The http server to send the data",
@@ -138,7 +143,13 @@ def main():
 
     args = parser.parse_args()
 
-    out = millipede(args.size, comment=args.comment, reverse=args.reverse, template=args.template)
+    out = millipede(
+        args.size,
+        comment=args.comment,
+        reverse=args.reverse,
+        template=args.template,
+        position=args.position
+    )
 
     if args.http_host:
         if args.http_auth:
