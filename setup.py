@@ -34,10 +34,10 @@ setup(
     author="Millipede Team",
     author_email="hello@millipede.io",
 
-    license="MIT",
+    license="BSD",
 
     extras_require={
-        'sms': ['requests']
+        'http': ['requests']
     },
 
     classifiers=[
