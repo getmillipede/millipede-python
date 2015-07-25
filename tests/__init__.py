@@ -50,6 +50,55 @@ class TestMillipedeSize(unittest.TestCase):
         )
 
 
+class TestMillipedePosition(unittest.TestCase):
+    "Test position parameter on millipede function"
+
+    def test_initial(self):
+        "Test initial position"
+        self.assertEqual(
+            millipede.millipede(0),
+            "    ╚⊙ ⊙╝\n"
+        )
+
+    def test_zero(self):
+        "Test position zero"
+        self.assertEqual(
+            millipede.millipede(0, position=0),
+            "    ╚⊙ ⊙╝\n"
+        )
+
+    def test_negative(self):
+        "Test negative position"
+        self.assertEqual(
+            millipede.millipede(0, position=-42),
+            "   ╚⊙ ⊙╝\n"
+        )
+
+    def test_positive(self):
+        "Test positive position"
+        self.assertEqual(
+            millipede.millipede(0, position=42),
+            "      ╚⊙ ⊙╝\n"
+        )
+
+    def test_body(self):
+        "Test that the body is doing fine as well"
+        self.assertEqual(
+            millipede.millipede(10, position=42),
+            """      ╚⊙ ⊙╝\n"""
+            """    ╚═(███)═╝\n"""
+            """    ╚═(███)═╝\n"""
+            """   ╚═(███)═╝\n"""
+            """  ╚═(███)═╝\n"""
+            """ ╚═(███)═╝\n"""
+            """╚═(███)═╝\n"""
+            """ ╚═(███)═╝\n"""
+            """  ╚═(███)═╝\n"""
+            """   ╚═(███)═╝\n"""
+            """    ╚═(███)═╝\n"""
+        )
+
+
 class TestMillipedeComment(unittest.TestCase):
     "Test comment parameter on millipede function"
 
