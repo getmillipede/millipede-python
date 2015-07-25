@@ -136,3 +136,23 @@ class TestMillipedeReverse(unittest.TestCase):
             """    ╔⊙ ⊙╗\n\n"""
             """coucou\n"""
         )
+
+
+class TestMillipedeOpposite(unittest.TestCase):
+    "Test opposite parameter on millipede function"
+
+    def test_opposite(self):
+        "Test with opposite enabled"
+        self.assertEqual(
+            millipede.millipede(1, opposite=True),
+            """     ╚⊙ ⊙╝\n"""
+            """   ╚═(███)═╝\n"""
+        )
+
+    def test_opposite(self):
+        "Test with opposite and reverse enabled"
+        self.assertEqual(
+            millipede.millipede(1, opposite=True, reverse=True),
+            """   ╔═(███)═╗\n"""
+            """     ╔⊙ ⊙╗\n"""
+        )
