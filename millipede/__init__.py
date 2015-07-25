@@ -14,6 +14,7 @@ import sys
 __version__ = '1.0'
 
 
+#pylint: disable=too-many-arguments
 def millipede(size, comment=None, reverse=False, template='default', position=0, opposite=False):
     """
     Output the millipede
