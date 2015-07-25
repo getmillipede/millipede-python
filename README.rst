@@ -127,5 +127,5 @@ Test in a confined environment
  $ docker run millipede
 
 
-.. |build-status| image:: https://travis-ci.org/evadot/millipede.svg
-   :target: https://travis-ci.org/evadot/millipede
+.. |build-status| image:: https://travis-ci.org/getmillipede/millipede-python.svg
+   :target: https://travis-ci.org/getmillipede/millipede-python
