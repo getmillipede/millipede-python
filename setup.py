@@ -1,6 +1,6 @@
 """Millipede installation script
 
-https://github.com/evadot/millipede
+https://github.com/getmillipede/millipede-python
 """
 
 from setuptools import setup, find_packages
@@ -29,10 +29,10 @@ setup(
     description="THE millipede generator",
     long_description=get_long_description(),
 
-    url="https://github.com/evadot/millipede",
+    url="https://github.com/getmillipede/millipede-python",
 
-    author="The millipede fan club",
-    author_email="millipede@bidouilliste.com",
+    author="Millipede Team",
+    author_email="hello@millipede.io",
 
     license="MIT",
 
