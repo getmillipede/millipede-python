@@ -35,9 +35,21 @@ def parse_rcfile(rcfile):
 
     Invalid lines are ignored with a warning
     """
+    def parse_bool(value):
+        """Parse boolean string"""
+        value = value.lower()
+        if value in ['yes', 'true']:
+            return True
+        elif value in ['no', 'false']:
+            return False
+        else:
+            raise ValueError('''Can't parse {}'''.format(value))
+
     valid_keys = {
         'size': int,
         'comment': str,
+        'reverse': parse_bool,
+        'opposite': parse_bool,
     }
     params = {}
 

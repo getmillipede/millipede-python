@@ -179,3 +179,23 @@ class TestRCParsing(unittest.TestCase):
             'size': 10,
             'comment': 'Here I test',
         })
+
+    def test_boolean_true(self):
+        input_data = [
+            'reverse true',
+            'opposite True'
+        ]
+        self.assertEqual(millipede.parse_rcfile(input_data), {
+            'reverse': True,
+            'opposite': True
+        })
+
+    def test_boolean_false(self):
+        input_data = [
+            'reverse false',
+            'opposite False'
+        ]
+        self.assertEqual(millipede.parse_rcfile(input_data), {
+            'reverse': False,
+            'opposite': False
+        })
