@@ -12,6 +12,7 @@ import sys
 
 
 __version__ = '2.0'
+DEFAULT_SIZE = 20
 
 
 def read_rcfile():
@@ -69,6 +70,22 @@ def parse_rcfile(rcfile):
                 print('Ignoring line {} from rcfile'.format(linenum + 1),
                       file=sys.stderr)
     return params
+
+
+def compute_settings(args, rc_settings):
+    """
+    Merge arguments and rc_settings.
+    """
+    settings = {}
+    for key, value in args.items():
+        if key in ['reverse', 'opposite']:
+            settings[key] = value ^ rc_settings.get(key, False)
+        else:
+            settings[key] = value or rc_settings.get(key)
+
+    if not settings['size']:
+        settings['size'] = DEFAULT_SIZE
+    return settings
 
 
 #pylint: disable=too-many-arguments
@@ -213,16 +230,15 @@ def main():
 
     args = parser.parse_args()
 
-    if not args.size:
-        args.size = rc_settings.get('size', 20)
+    settings = compute_settings(vars(args), rc_settings)
 
     out = millipede(
-        args.size,
-        comment=args.comment or rc_settings.get('comment'),
-        reverse=args.reverse,
-        template=args.template,
-        position=args.position,
-        opposite=args.opposite
+        settings['size'],
+        comment=settings['comment'],
+        reverse=settings['reverse'],
+        template=settings['template'],
+        position=settings['position'],
+        opposite=settings['opposite']
     )
 
     if args.http_host:
