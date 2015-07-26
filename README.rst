@@ -101,6 +101,27 @@ And using --http-data key=value to can add more variables::
 
  millipede 10 --http-host=http://localhost:5000/ --http-name message --http-auth=user:pass --http-data myvar=mydata
 
+RCFile
+======
+
+Some default settings can be set from a rcfile.
+
+Here is a sample of a rcfile::
+
+ # set default size to 10
+ size 10
+ comment I'm the millipede!
+ reverse true
+ opposite false
+ template default
+ # position 3
+
+The millipede looks for the following files::
+
+  ${HOME}/.millipederc
+  /usr/local/etc/millipederc
+  /etc/millipederc
+
 Installation from sources
 ==========================
 

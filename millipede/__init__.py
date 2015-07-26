@@ -12,6 +12,80 @@ import sys
 
 
 __version__ = '2.0'
+DEFAULT_SIZE = 20
+
+
+def read_rcfile():
+    """
+    Try to read a rcfile from a list of paths
+    """
+    files = [
+        '{}/.millipederc'.format(os.environ.get('HOME')),
+        '/usr/local/etc/millipederc',
+        '/etc/millipederc',
+    ]
+    for filepath in files:
+        if os.path.isfile(filepath):
+            with open(filepath) as rcfile:
+                return parse_rcfile(rcfile)
+    return {}
+
+def parse_rcfile(rcfile):
+    """
+    Parses rcfile
+
+    Invalid lines are ignored with a warning
+    """
+    def parse_bool(value):
+        """Parse boolean string"""
+        value = value.lower()
+        if value in ['yes', 'true']:
+            return True
+        elif value in ['no', 'false']:
+            return False
+        else:
+            raise ValueError('''Can't parse {}'''.format(value))
+
+    valid_keys = {
+        'size': int,
+        'comment': str,
+        'template': str,
+        'reverse': parse_bool,
+        'opposite': parse_bool,
+        'position': int,
+    }
+    params = {}
+
+    for linenum, line in enumerate(rcfile):
+        line = line.strip()
+        if not line or line[0] == '#':
+            continue
+        pos = line.find(' ')
+        key = line[:pos]
+        value = line[pos:].strip()
+        if key in valid_keys.keys():
+            try:
+                params[key] = valid_keys[key](value)
+            except ValueError:
+                print('Ignoring line {} from rcfile'.format(linenum + 1),
+                      file=sys.stderr)
+    return params
+
+
+def compute_settings(args, rc_settings):
+    """
+    Merge arguments and rc_settings.
+    """
+    settings = {}
+    for key, value in args.items():
+        if key in ['reverse', 'opposite']:
+            settings[key] = value ^ rc_settings.get(key, False)
+        else:
+            settings[key] = value or rc_settings.get(key)
+
+    if not settings['size']:
+        settings['size'] = DEFAULT_SIZE
+    return settings
 
 
 #pylint: disable=too-many-arguments
@@ -108,6 +182,7 @@ def main():
     """
     Entry point
     """
+    rc_settings = read_rcfile()
     parser = ArgumentParser(description='Millipede generator')
     parser.add_argument('-s', '--size',
                         type=int,
@@ -155,16 +230,15 @@ def main():
 
     args = parser.parse_args()
 
-    if not args.size:
-        args.size = 20
+    settings = compute_settings(vars(args), rc_settings)
 
     out = millipede(
-        args.size,
-        comment=args.comment,
-        reverse=args.reverse,
-        template=args.template,
-        position=args.position,
-        opposite=args.opposite
+        settings['size'],
+        comment=settings['comment'],
+        reverse=settings['reverse'],
+        template=settings['template'],
+        position=settings['position'],
+        opposite=settings['opposite']
     )
 
     if args.http_host:
