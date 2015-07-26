@@ -118,7 +118,7 @@ def millipede(size, comment=None, reverse=False, template='default', position=0,
         'default': {'bodyr': '╔═(███)═╗', 'body': '╚═(███)═╝',
                     'headr': '╔⊙ ⊙╗', 'head': '╚⊙ ⊙╝'},
         'inception': {'bodyr': '╔═(🐛🐛🐛)═╗', 'body': '╚═(🐛🐛🐛)═╝',
-                    'headr': '╔⊙ ⊙╗', 'head': '╚⊙ ⊙╝'},
+                      'headr': '╔⊙ ⊙╗', 'head': '╚⊙ ⊙╝'},
         'humancentipede': {'bodyr': '╔═(😷😷😷)═╗', 'body': '╚═(😷😷😷)═╝',
                            'headr': '╔⊙ ⊙╗', 'head': '╚⊙ ⊙╝'},
     }
