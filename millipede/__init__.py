@@ -48,8 +48,10 @@ def parse_rcfile(rcfile):
     valid_keys = {
         'size': int,
         'comment': str,
+        'template': str,
         'reverse': parse_bool,
         'opposite': parse_bool,
+        'position': int,
     }
     params = {}
 
