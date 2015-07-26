@@ -156,3 +156,26 @@ class TestMillipedeOpposite(unittest.TestCase):
             """   ╔═(███)═╗\n"""
             """     ╔⊙ ⊙╗\n"""
         )
+
+
+class TestRCParsing(unittest.TestCase):
+    "Test rcfile parsing"
+
+    def test_parsing_comment_or_empty(self):
+        input_data = [
+            '',
+            '  ',
+            '# some comment',
+            '   # some other comment'
+        ]
+        self.assertEqual(millipede.parse_rcfile(input_data), {})
+
+    def test_parsing(self):
+        input_data = [
+            'size 10',
+            'comment Here I test'
+        ]
+        self.assertEqual(millipede.parse_rcfile(input_data), {
+            'size': 10,
+            'comment': 'Here I test',
+        })
