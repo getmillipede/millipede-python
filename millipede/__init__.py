@@ -30,6 +30,7 @@ def read_rcfile():
                 return parse_rcfile(rcfile)
     return {}
 
+
 def parse_rcfile(rcfile):
     """
     Parses rcfile
@@ -89,12 +90,15 @@ def compute_settings(args, rc_settings):
 
 
 #pylint: disable=too-many-arguments
-def millipede(size, comment=None, reverse=False, template='default', position=0, opposite=False):
+def millipede(size, comment=None, reverse=False, template='default',
+              position=0, opposite=False, curve=4):
     """
     Output the millipede
     """
-    padding_offsets = [2, 1, 0, 1, 2, 3, 4, 4, 3]
-    padding_suite_length = len(padding_offsets)
+    padding_offsets = [
+        min(i % (curve * 2), curve * 2 - i % (1 + curve * 2))
+        for i in range(curve * 2 - 2, curve * 4 - 1)
+    ]
     head_padding_extra_offset = 2
 
     if opposite:
@@ -128,13 +132,14 @@ def millipede(size, comment=None, reverse=False, template='default', position=0,
     template = templates.get(template, templates['default'])
 
     head = "{}{}\n".format(
-        " " * (padding_offsets[position % padding_suite_length] + head_padding_extra_offset),
+        " " * (padding_offsets[position % (curve * 2 + 1)] +
+               head_padding_extra_offset),
         template['headr'] if reverse else template['head']
     )
 
     body_lines = [
         "{}{}\n".format(
-            " " * padding_offsets[(x + position) % padding_suite_length],
+            " " * padding_offsets[(x + position) % (curve * 2 + 1)],
             template['bodyr'] if reverse else template['body']
         )
         for x in range(size)
@@ -143,17 +148,15 @@ def millipede(size, comment=None, reverse=False, template='default', position=0,
     if reverse:
         body_lines.reverse()
 
-    body = "".join(body_lines)
-
     output = ""
     if reverse:
-        output += body + head
+        output += "".join(body_lines) + head
         if comment:
             output += "\n" + comment + "\n"
     else:
         if comment:
             output += comment + "\n\n"
-        output += head + body
+        output += head + "".join(body_lines)
 
     return output
 
@@ -168,7 +171,7 @@ def api_post(message, url, name, http_data=None, auth=None):
         print('requests is required to do api post.', file=sys.stderr)
         sys.exit(1)
 
-    data = {name : message}
+    data = {name: message}
     if http_data:
         for var in http_data:
             key, value = var.split('=')
@@ -194,6 +197,11 @@ def main():
                         type=int,
                         nargs="?",
                         help='the size of the millipede')
+    parser.add_argument('--curve',
+                        type=int,
+                        nargs="?",
+                        help='the size of the curve',
+                        default=4)
     parser.add_argument('-c', '--comment',
                         type=str,
                         help='the comment')
@@ -244,7 +252,8 @@ def main():
         reverse=settings['reverse'],
         template=settings['template'],
         position=settings['position'],
-        opposite=settings['opposite']
+        opposite=settings['opposite'],
+        curve=settings['curve'],
     )
 
     if args.http_host:
