@@ -121,6 +121,8 @@ def millipede(size, comment=None, reverse=False, template='default', position=0,
                       'headr': '╔⊙ ⊙╗', 'head': '╚⊙ ⊙╝'},
         'humancentipede': {'bodyr': '╔═(😷😷😷)═╗', 'body': '╚═(😷😷😷)═╝',
                            'headr': '╔⊙ ⊙╗', 'head': '╚⊙ ⊙╝'},
+        'heart': {'bodyr': '╔═(❤️❤️❤️)═╗', 'body': '╚═(❤️❤️❤️)═╝',
+                  'headr': '╔⊙ ⊙╗', 'head': '╚⊙ ⊙╝'},
     }
 
     template = templates.get(template, templates['default'])
